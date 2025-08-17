@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+
 import { Send, Plus, Trash2, Clock, Eye, Copy, Download, History, Zap, Globe, Settings } from 'lucide-react';
 
+const API_URL = process.env.REACT_APP_API_URL;
 const PostmanClone = () => {
   const [request, setRequest] = useState({
     method: 'GET',
@@ -26,7 +28,7 @@ const PostmanClone = () => {
 
   const fetchHistory = async () => {
     try {
-      const res = await fetch('process.env.REACT_APP_API_URL/api/history');
+      const res = await fetch(`${API_URL}/api/history`);
       const data = await res.json();
       if (data.success) {
         setHistory(data.history);
@@ -62,7 +64,7 @@ const PostmanClone = () => {
         bodyType: request.bodyType
       };
 
-      const res = await fetch('process.env.REACT_APP_API_URL/api/request', {
+      const res = await fetch(`${API_URL}/api/request`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
